@@ -2,22 +2,24 @@ import model.Epic;
 import model.Subtask;
 import model.Task;
 import service.Storage;
-import static service.Status.NEW;
+
+import static model.Status.NEW;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в Трекер задач!");
         testCode(); // Тестирование задачи
     }
+
     private static void testCode() { // Проверка работы приложения
         Storage storage = new Storage();
         Task taskOne = new Task("Задача №1", "Описание задачи №1", NEW);
         Task taskTwo = new Task("Задача №2", "Описание задачи №2", NEW);
         Epic epicOne = new Epic("Большая задача (эпик) №3", "Описание задачи №3", NEW);
-        Subtask subtaskOne = new Subtask("Подзадача №4", "Описание подзадачи №4", NEW,3);
-        Subtask subtaskTwo = new Subtask("Подзадача №5", "Описание подзадачи №5", NEW,3);
+        Subtask subtaskOne = new Subtask("Подзадача №4", "Описание подзадачи №4", NEW, 3);
+        Subtask subtaskTwo = new Subtask("Подзадача №5", "Описание подзадачи №5", NEW, 3);
         Epic epicTwo = new Epic("Большая задача (эпик) №6", "Описание задачи №6", NEW);
-        Subtask subtaskThree = new Subtask("Подзадача №7", "Описание подзадачи №7", NEW,6);
+        Subtask subtaskThree = new Subtask("Подзадача №7", "Описание подзадачи №7", NEW, 6);
         storage.addTask(taskOne); // Внесение всех задач, эпиков, подзадач
         storage.addTask(taskTwo);
         storage.addEpic(epicOne);
@@ -32,6 +34,8 @@ public class Main {
         storage.deleteEpicID(3);
         System.out.println(storage.getTasks()); // Проверка работы метода по удалению
         System.out.println(storage.getEpics());
+        storage.deleteAllSubtask();
+        System.out.println(storage.getSubtasks());
     }
 }
 

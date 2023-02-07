@@ -1,4 +1,5 @@
-package service;
+package model;
+
 public enum Status {
     NEW, // Новая задача
     IN_PROGRESS, // Задача в работе
