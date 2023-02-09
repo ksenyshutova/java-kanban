@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static model.Status.*;
+import static model.Status.DONE;
+import static model.Status.IN_PROGRESS;
 
 public class Storage implements Manager { // Класс для хранения всей необходимой информации задач, эпиков, подзадач
     private final Map<Integer, Task> tasks = new HashMap<>(); // Присвоение соответствия между идентификатором и задачей

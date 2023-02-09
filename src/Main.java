@@ -1,7 +1,7 @@
+import manager.Storage;
 import model.Epic;
 import model.Subtask;
 import model.Task;
-import manager.Storage;
 
 import static model.Status.NEW;
 

@@ -11,6 +11,7 @@ public interface Manager {
 
     void addEpic(Epic epic);
 
+
     void addSubtask(Subtask subtask);
 
     List<Subtask> getListSubtaskEpic(int id); // Метод для получения списка подзадач в эпике
