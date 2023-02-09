@@ -4,22 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Epic extends Task {
-    private List<Subtask> subtaskEpic = new ArrayList<>(); // Список подзадач в эпике
+    public List<Integer> subtaskId = new ArrayList<>();// Список идентификаторов в эпике
 
     public Epic(String name, String description, Status status) {
         super(name, description, status);
     }
 
-    public List<Subtask> getSubtaskEpic() {
-        return subtaskEpic;
+    public List<Integer> getSubtaskId() {
+        return subtaskId;
     }
 
-    public void setSubtaskEpic(List<Subtask> subtaskEpic) {
-        this.subtaskEpic = subtaskEpic;
+    public void addSubtaskId(int idSubtask) { // Методы для добавления, удаления, очистки подзадач в эпике
+        subtaskId.add(idSubtask);
+    }
+
+    public void deleteSubtaskId(int idSubtask) {
+        subtaskId.remove(Integer.valueOf(idSubtask));
+    }
+
+    public void deleteAllSubtaskId() {
+        subtaskId.clear();
     }
 
     @Override
     public String toString() {
-        return "Epic{" + "id=" + getId() + ", name='" + getName() + '\'' + ", description='" + getDescription() + '\'' + ", status='" + getStatus() + '\'' + ", subtaskEpic=" + subtaskEpic + '}';
+        return "Epic{" +
+                "name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", status=" + getStatus() +
+                ", subtaskId=" + subtaskId +
+                ", id=" + getId() +
+                '}';
     }
 }

@@ -1,7 +1,7 @@
 import model.Epic;
 import model.Subtask;
 import model.Task;
-import service.Storage;
+import manager.Storage;
 
 import static model.Status.NEW;
 
@@ -30,12 +30,21 @@ public class Main {
         System.out.println(storage.getTasks()); // Печать задач, эпиков, подзадач
         System.out.println(storage.getEpics());
         System.out.println(storage.getSubtasks());
+        storage.getListSubtaskEpic(6);
+        System.out.println(storage.getEpics());
         storage.deleteTaskID(2); // Удаление определенных задач
         storage.deleteEpicID(3);
+        storage.deleteSubtaskID(4);
         System.out.println(storage.getTasks()); // Проверка работы метода по удалению
         System.out.println(storage.getEpics());
-        storage.deleteAllSubtask();
         System.out.println(storage.getSubtasks());
+        storage.deleteAllSubtask();
+        System.out.println(storage.getTasks());
+        System.out.println(storage.getSubtasks());
+        System.out.println(storage.getEpics());
+        storage.renewalTask(taskOne);
+        System.out.println(storage.getTasks());
+        storage.checkStatusEpic(6);
     }
 }
 

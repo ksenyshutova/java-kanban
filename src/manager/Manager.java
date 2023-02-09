@@ -1,4 +1,4 @@
-package service;
+package manager;
 
 import model.Epic;
 import model.Subtask;
@@ -27,13 +27,13 @@ public interface Manager {
 
     void deleteSubtaskID(int id);
 
-    void checkStatusEpic(Epic epic); // Проверка статуса эпика
+    void checkStatusEpic(int idEpic); // Проверка статуса эпика
 
     Task renewalTask(Task task); // Методы по обновлению задач, подзадач, эпиков
 
     Epic renewalEpic(Epic epic);
 
-    Subtask renewalSubtask(Subtask subtask);
+    Subtask renewalSubtask(int idEpic, Subtask subtask);
 
     List<Task> getTasks(); // Методы для получения задач, эпиков, подзадач
 
