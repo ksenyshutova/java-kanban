@@ -98,8 +98,8 @@ public class Storage implements Manager { // Класс для хранения 
     }
 
     @Override
-    public void checkStatusEpic(int epicId) {
-        Epic epic = epics.get(epicId);
+    public void checkStatusEpic(int idEpic) {
+        Epic epic = epics.get(idEpic);
         if (epic.getSubtaskId().isEmpty()) {
             epic.setStatus(Status.NEW);
         }
