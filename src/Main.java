@@ -13,6 +13,7 @@ public class Main {
 
     private static void testCode() { // Проверка работы приложения
         Storage storage = new Storage();
+
         Task taskOne = new Task("Задача №1", "Описание задачи №1", NEW);
         Task taskTwo = new Task("Задача №2", "Описание задачи №2", NEW);
         Epic epicOne = new Epic("Большая задача (эпик) №3", "Описание задачи №3", NEW);
@@ -44,7 +45,7 @@ public class Main {
         System.out.println(storage.getEpics());
         storage.renewalTask(taskOne);
         System.out.println(storage.getTasks());
-        storage.checkStatusEpic(6);
+        storage.getListSubtaskEpic(7);
     }
 }
 

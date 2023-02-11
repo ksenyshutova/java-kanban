@@ -11,7 +11,6 @@ public interface Manager {
 
     void addEpic(Epic epic);
 
-
     void addSubtask(Subtask subtask);
 
     List<Subtask> getListSubtaskEpic(int id); // Метод для получения списка подзадач в эпике
@@ -28,13 +27,13 @@ public interface Manager {
 
     void deleteSubtaskID(int id);
 
-    void checkStatusEpic(int idEpic); // Проверка статуса эпика
+    void checkStatusEpic(Epic epic); // Проверка статуса эпика
 
     Task renewalTask(Task task); // Методы по обновлению задач, подзадач, эпиков
 
     Epic renewalEpic(Epic epic);
 
-    Subtask renewalSubtask(int idEpic, Subtask subtask);
+    Subtask renewalSubtask(Subtask subtask);
 
     List<Task> getTasks(); // Методы для получения задач, эпиков, подзадач
 

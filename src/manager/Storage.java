@@ -19,10 +19,6 @@ public class Storage implements Manager { // Класс для хранения 
     private final Map<Integer, Subtask> subtasks = new HashMap<>();
     private int id = 0;
 
-    private boolean presenceSubtask(int id) {
-        return subtasks.containsKey(id);
-    }
-
     @Override
     public void addTask(Task task) { // Метод по добавлению задач в мапу
         id++;
@@ -42,15 +38,23 @@ public class Storage implements Manager { // Класс для хранения 
         id++;
         subtask.setId(id);
         subtasks.put(id, subtask);
-        int idEpic = subtask.getIdEpic();
         Epic epic = epics.get(subtask.getIdEpic());
         epic.addSubtaskId(id);
-        checkStatusEpic(idEpic);
+        checkStatusEpic(epic);
     }
 
     @Override
     public List<Subtask> getListSubtaskEpic(int id) { // Метод для получения списка подзадач в эпике
-        return new ArrayList<>(subtasks.values());
+        if (epics.containsKey(id)) {
+            List<Subtask> subtask = new ArrayList<>();
+            Epic epic = epics.get(id);
+            for (int i = 0; i < epic.getSubtaskId().size(); i++) {
+                subtask.add(subtasks.get(epic.getSubtaskId().get(i)));
+            }
+            return subtask;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -89,23 +93,33 @@ public class Storage implements Manager { // Класс для хранения 
 
     @Override
     public void deleteSubtaskID(int id) { // Метод по удалению определенной подзадачи
-        if (presenceSubtask(id)) {
+        if (subtasks.containsKey(id)) {
             int idEpic = subtasks.get(id).getIdEpic();
             Epic epic = epics.get(idEpic);
             epic.deleteSubtaskId(id);
-            checkStatusEpic(idEpic);
+            subtasks.remove(id);
+            checkStatusEpic(epic);
         }
     }
 
     @Override
-    public void checkStatusEpic(int idEpic) {
-        Epic epic = epics.get(idEpic);
-        if (epic.getSubtaskId().isEmpty()) {
-            epic.setStatus(Status.NEW);
-        }
+    public void checkStatusEpic(Epic epic) {
+        int subtaskNew = 0;
+        int subtaskInProgress = 0;
+        int subtaskDone = 0;
         for (Integer subtaskId : epic.getSubtaskId()) {
             Subtask subtask = subtasks.get(subtaskId);
-            if (subtask.getStatus() == Status.NEW) {
+            switch (subtask.getStatus()) {
+                case NEW:
+                    ++subtaskNew;
+                    break;
+                case IN_PROGRESS:
+                    ++subtaskInProgress;
+                    break;
+                case DONE:
+                    ++subtaskDone;
+            }
+            if (subtask.getStatus() == Status.NEW || epic.getSubtaskId().isEmpty()) {
                 epic.setStatus(Status.NEW);
             } else if (subtask.getStatus() == DONE) {
                 epic.setStatus(DONE);
@@ -117,30 +131,29 @@ public class Storage implements Manager { // Класс для хранения 
 
     @Override
     public Task renewalTask(Task task) { // Методы по обновлению задач, подзадач, эпиков
-        if (!tasks.containsKey(id)) {
-            return null;
+        if (tasks.containsKey(task.getId())) {
+            tasks.put(task.getId(), task);
         }
-        tasks.put(id, task);
-        return task;
+        return null;
     }
 
     @Override
     public Epic renewalEpic(Epic epic) {
-        if (!epics.containsKey(id)) {
-            return null;
+        if (epics.containsKey(epic.getId())) {
+            epics.put(epic.getId(), epic);
+            checkStatusEpic(epic);
         }
-        epics.put(id, epic);
-        return epic;
+        return null;
     }
 
     @Override
-    public Subtask renewalSubtask(int idEpic, Subtask subtask) {
-        if (!subtasks.containsKey(id)) {
-            return null;
+    public Subtask renewalSubtask(Subtask subtask) {
+        if (subtasks.containsKey(subtask.getId())) {
+            subtasks.put(subtask.getId(), subtask);
+            Epic epic = epics.get(subtask.getIdEpic());
+            checkStatusEpic(epic);
         }
-        subtasks.put(id, subtask);
-        checkStatusEpic(idEpic);
-        return subtask;
+        return null;
     }
 
     public List<Task> getTasks() {
