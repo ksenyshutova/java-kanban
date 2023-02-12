@@ -10,9 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static model.Status.DONE;
-import static model.Status.IN_PROGRESS;
-
 public class Storage implements Manager { // Класс для хранения всей необходимой информации задач, эпиков, подзадач
     private final Map<Integer, Task> tasks = new HashMap<>(); // Присвоение соответствия между идентификатором и задачей
     private final Map<Integer, Epic> epics = new HashMap<>();
@@ -103,30 +100,27 @@ public class Storage implements Manager { // Класс для хранения 
     }
 
     @Override
-    public void checkStatusEpic(Epic epic) {
+    public void checkStatusEpic(Epic epic) { //Обновление данных эпика
         int subtaskNew = 0;
-        int subtaskInProgress = 0;
         int subtaskDone = 0;
+        if (epic.getSubtaskId().isEmpty()) {
+            epic.setStatus(Status.NEW);
+            epics.put(epic.getId(), epic);
+            return;
+        }
         for (Integer subtaskId : epic.getSubtaskId()) {
-            Subtask subtask = subtasks.get(subtaskId);
-            switch (subtask.getStatus()) {
-                case NEW:
-                    ++subtaskNew;
-                    break;
-                case IN_PROGRESS:
-                    ++subtaskInProgress;
-                    break;
-                case DONE:
-                    ++subtaskDone;
-            }
-            if (subtask.getStatus() == Status.NEW || epic.getSubtaskId().isEmpty()) {
-                epic.setStatus(Status.NEW);
-            } else if (subtask.getStatus() == DONE) {
-                epic.setStatus(DONE);
-            } else {
-                epic.setStatus(IN_PROGRESS);
+            if (subtasks.get(subtaskId).getStatus() == Status.NEW) {
+                ++subtaskNew;
+            } else if (subtasks.get(subtaskId).getStatus() == Status.DONE) {
+                ++subtaskDone;
             }
         }
+        if (subtaskNew == epic.getSubtaskId().size()) {
+            epic.setStatus(Status.NEW);
+        } else if (subtaskDone == epic.getSubtaskId().size()) {
+            epic.setStatus(Status.DONE);
+        } else epic.setStatus(Status.IN_PROGRESS);
+        epics.put(epic.getId(), epic);
     }
 
     @Override
