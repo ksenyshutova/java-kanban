@@ -105,7 +105,6 @@ public class Storage implements Manager { // Класс для хранения 
         int subtaskDone = 0;
         if (epic.getSubtaskId().isEmpty()) {
             epic.setStatus(Status.NEW);
-            epics.put(epic.getId(), epic);
             return;
         }
         for (Integer subtaskId : epic.getSubtaskId()) {
@@ -119,8 +118,9 @@ public class Storage implements Manager { // Класс для хранения 
             epic.setStatus(Status.NEW);
         } else if (subtaskDone == epic.getSubtaskId().size()) {
             epic.setStatus(Status.DONE);
-        } else epic.setStatus(Status.IN_PROGRESS);
-        epics.put(epic.getId(), epic);
+        } else {
+            epic.setStatus(Status.IN_PROGRESS);
+        }
     }
 
     @Override
