@@ -6,7 +6,7 @@ import model.Task;
 
 import java.util.List;
 
-public interface Manager {
+public interface TaskManager {
     void addTask(Task task); // Методы по добавлению задач, эпиков, подзадач
 
     void addEpic(Epic epic);
@@ -40,4 +40,13 @@ public interface Manager {
     List<Epic> getEpics();
 
     List<Subtask> getSubtasks();
+
+    List<Task> getHistory(); // Метод, возвращающий 10 последних просмотренных задач
+
+    Task getTasksID(int id);
+
+    Epic getEpicsID(int id);
+
+    Subtask getSubtasksID(int id);
+
 }
