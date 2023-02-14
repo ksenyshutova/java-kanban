@@ -1,4 +1,5 @@
-import manager.InMemoryTaskManager;
+import manager.Managers;
+import manager.TaskManager;
 import model.Epic;
 import model.Subtask;
 import model.Task;
@@ -12,7 +13,7 @@ public class Main {
     }
 
     private static void testCode() { // Проверка работы приложения
-        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
+        TaskManager inMemoryTaskManager = Managers.getDefault();
 
         Task taskOne = new Task("Задача №1", "Описание задачи №1", NEW);
         Task taskTwo = new Task("Задача №2", "Описание задачи №2", NEW);

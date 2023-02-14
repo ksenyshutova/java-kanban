@@ -5,7 +5,7 @@ public class Managers { // Утилитарный класс, отвечающи
         return new InMemoryTaskManager();
     }
 
-    public static InMemoryHistoryManager getDefaultHistory() { // Метод, возвращающий объект— историю просмотров
+    public static HistoryManager getDefaultHistory() { // Метод, возвращающий объект— историю просмотров
         return new InMemoryHistoryManager();
     }
 }
