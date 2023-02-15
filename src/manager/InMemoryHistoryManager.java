@@ -12,11 +12,11 @@ public class InMemoryHistoryManager implements HistoryManager { /* Класс д
 
     @Override
     public void add(Task task) { // Метод, который помечает задачи как просмотренные
-        if (tasks != null) { // Добавляем проверку на null
+        if (tasks != null) { // Добавляем проверку на null для всего кода
+            if (tasks.size() == dimension) {
+                tasks.remove(0); // Удаляем самую старую задачу, если размер списка больше 10
+            }
             tasks.add(task);
-        }
-        if (tasks.size() == dimension) {
-            tasks.remove(0); // Удаляем самую старую задачу, если размер списка больше 10
         }
     }
 

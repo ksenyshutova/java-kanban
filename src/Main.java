@@ -35,5 +35,16 @@ public class Main {
         System.out.println(inMemoryTaskManager.getHistory());
         inMemoryTaskManager.getSubtasksID(7);
         System.out.println(inMemoryTaskManager.getHistory());
+        inMemoryTaskManager.getEpicsID(6);
+        inMemoryTaskManager.getEpicsID(6);
+        inMemoryTaskManager.getEpicsID(6);
+        inMemoryTaskManager.getEpicsID(6);
+        inMemoryTaskManager.getEpicsID(6);
+        inMemoryTaskManager.getEpicsID(6);
+        inMemoryTaskManager.getEpicsID(6);
+        inMemoryTaskManager.getEpicsID(6);
+        System.out.println(inMemoryTaskManager.getHistory());
+        inMemoryTaskManager.getSubtasksID(7);
+        System.out.println(inMemoryTaskManager.getHistory());
     }
 }
