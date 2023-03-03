@@ -22,14 +22,8 @@ public class Main {
 
         inMemoryHistoryManager.add(epicOne); // Внесение всех задач, эпиков, подзадач
         inMemoryHistoryManager.add(epicTwo);
-        System.out.println(inMemoryHistoryManager.getHistory()); // После запросов выводим историю и смотрим, что в ней нет повторо
-        inMemoryHistoryManager.remove(epicTwo.getId());
         inMemoryHistoryManager.add(subtaskOne);
         inMemoryHistoryManager.add(subtaskTwo);
-        inMemoryHistoryManager.add(subtaskThree);
-        inMemoryHistoryManager.add(epicTwo);
-        System.out.println(inMemoryHistoryManager.getHistory());
-        inMemoryHistoryManager.add(subtaskThree);
-        System.out.println(inMemoryHistoryManager.getHistory());
+        System.out.println(inMemoryHistoryManager.getHistory()); // После запросов выводим историю и смотрим, что в ней нет повторо
     }
 }

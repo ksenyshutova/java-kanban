@@ -77,7 +77,7 @@ public class InMemoryTaskManager implements TaskManager { // Класс для �
 
     @Override
     public void deleteTaskID(int id) { // Метод по удалению определенной задачи
-        tasks.remove(id);
+        Managers.getDefaultHistory().remove(id);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class InMemoryTaskManager implements TaskManager { // Класс для �
         for (Integer idSubtask : subtaskId) {
             subtasks.remove(idSubtask);
         }
-        epics.remove(id);
+        Managers.getDefaultHistory().remove(id);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class InMemoryTaskManager implements TaskManager { // Класс для �
             int idEpic = subtasks.get(id).getIdEpic();
             Epic epic = epics.get(idEpic);
             epic.deleteSubtaskId(id);
-            subtasks.remove(id);
+            Managers.getDefaultHistory().remove(id);
             checkStatusEpic(epic);
         }
     }
