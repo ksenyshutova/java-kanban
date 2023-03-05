@@ -3,7 +3,6 @@ package manager;
 
 import model.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager { /* Класс для работы с историей, перенос функционала из InMemoryTaskManager,
@@ -14,8 +13,8 @@ public class InMemoryHistoryManager implements HistoryManager { /* Класс д
 
     @Override
     public void add(Task task) { // Метод по добавлению задач
-        List<Task> tasks = new ArrayList<>(); //Создаем список задач
-        if (tasks != null) { // Добавляем проверку на null для всего кода
+        list.removeId(task.getId()); //  Удаляем задачу из связанного списка, чтобы не было дубликатов, потом добавляем новую задачу
+        if (task != null) { // Добавляем проверку на null
             list.linkLast(task);
         }
     }

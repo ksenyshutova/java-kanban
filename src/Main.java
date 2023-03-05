@@ -1,5 +1,6 @@
 import manager.HistoryManager;
 import manager.Managers;
+import manager.TaskManager;
 import model.Epic;
 import model.Subtask;
 
@@ -13,6 +14,7 @@ public class Main {
 
     private static void testCode() { // Проверка работы приложения
         HistoryManager inMemoryHistoryManager = Managers.getDefaultHistory();
+        TaskManager inMemoryTaskManager = Managers.getDefault();
 
         Epic epicOne = new Epic("Большая задача (эпик) №1", "Описание задачи №1", NEW);
         Subtask subtaskOne = new Subtask("Подзадача №2", "Описание подзадачи №2", NEW, 1);
@@ -20,10 +22,19 @@ public class Main {
         Subtask subtaskThree = new Subtask("Подзадача №4", "Описание подзадачи №4", NEW, 1);
         Epic epicTwo = new Epic("Большая задача (эпик) №5", "Описание задачи №5", NEW);
 
-        inMemoryHistoryManager.add(epicOne); // Внесение всех задач, эпиков, подзадач
+        inMemoryTaskManager.addEpic(epicOne); // Внесение всех задач, эпиков, подзадач
+        inMemoryTaskManager.addEpic(epicTwo);
+        inMemoryTaskManager.addSubtask(subtaskOne);
+        inMemoryTaskManager.addSubtask(subtaskTwo);
+        inMemoryTaskManager.addSubtask(subtaskThree);
+        inMemoryTaskManager.addSubtask(subtaskOne);
+        inMemoryTaskManager.addEpic(epicTwo);
+        inMemoryHistoryManager.add(epicOne);
         inMemoryHistoryManager.add(epicTwo);
-        inMemoryHistoryManager.add(subtaskOne);
-        inMemoryHistoryManager.add(subtaskTwo);
+        System.out.println(inMemoryHistoryManager.getHistory());
+        inMemoryHistoryManager.add(epicOne);
         System.out.println(inMemoryHistoryManager.getHistory()); // После запросов выводим историю и смотрим, что в ней нет повторо
+        inMemoryHistoryManager.remove(7);
+        System.out.println(inMemoryHistoryManager.getHistory());
     }
 }

@@ -77,16 +77,22 @@ public class InMemoryTaskManager implements TaskManager { // Класс для �
 
     @Override
     public void deleteTaskID(int id) { // Метод по удалению определенной задачи
-        Managers.getDefaultHistory().remove(id);
+        if (tasks.containsKey(id)) {
+            tasks.remove(id);
+            inMemoryHistoryManager.remove(id);
+        }
     }
 
     @Override
     public void deleteEpicID(int id) { // Метод по удалению определенного эпика
-        List<Integer> subtaskId = epics.get(id).getSubtaskId();
-        for (Integer idSubtask : subtaskId) {
-            subtasks.remove(idSubtask);
+        if (epics.containsKey(id)) {
+            List<Integer> subtaskId = epics.get(id).getSubtaskId();
+            for (Integer idSubtask : subtaskId) {
+                subtasks.remove(idSubtask);
+            }
+            epics.remove(id);
+            inMemoryHistoryManager.remove(id);
         }
-        Managers.getDefaultHistory().remove(id);
     }
 
     @Override
@@ -95,7 +101,8 @@ public class InMemoryTaskManager implements TaskManager { // Класс для �
             int idEpic = subtasks.get(id).getIdEpic();
             Epic epic = epics.get(idEpic);
             epic.deleteSubtaskId(id);
-            Managers.getDefaultHistory().remove(id);
+            subtasks.remove(id);
+            inMemoryHistoryManager.remove(id);
             checkStatusEpic(epic);
         }
     }
