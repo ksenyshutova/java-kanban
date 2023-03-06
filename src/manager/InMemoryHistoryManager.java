@@ -10,11 +10,10 @@ public class InMemoryHistoryManager implements HistoryManager { /* Класс д
 
     private final CustomLinkedList<Task> list = new CustomLinkedList<>();
 
-
     @Override
     public void add(Task task) { // Метод по добавлению задач
-        list.removeId(task.getId()); //  Удаляем задачу из связанного списка, чтобы не было дубликатов, потом добавляем новую задачу
         if (task != null) { // Добавляем проверку на null
+            list.removeId(task.getId()); //  Удаляем задачу из связанного списка, чтобы не было дубликатов, потом добавляем новую задачу
             list.linkLast(task);
         }
     }

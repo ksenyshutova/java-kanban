@@ -45,13 +45,13 @@ public class CustomLinkedList<T extends Task> { // Создаем собстве
             if (prev == null) {
                 first = next;
             } else {
-                prev.next = newNode;
+                prev.next = next;
                 newNode.prev = null;
             }
             if (next == null) {
                 last = prev;
             } else {
-                next.prev = next;
+                next.prev = prev;
                 newNode.next = null;
             }
             newNode.item = null;
